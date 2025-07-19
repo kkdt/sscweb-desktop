@@ -10,6 +10,8 @@ plugins {
     id 'application'
 }
 
+version = "0.1"
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -21,9 +23,16 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation libs.junit
-
     // This dependency is used by the application.
     implementation libs.guava
+
+    implementation libs.sscweb
+    implementation("javax.xml.ws:jaxws-api:2.2.1")
+
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.7.18')
+    implementation 'org.springframework.boot:spring-boot-starter'
+//    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -33,7 +42,29 @@ java {
     }
 }
 
+distTar {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
+distZip {
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+}
+
+jar {
+    manifest {
+        attributes(
+            "Name": project.name,
+            "Specification-Title": "sscweb-desktop",
+            "Specification-Version": version,
+            "Specification-Vendor": "kkdt",
+            "Implementation-Title": "Satellite Situation Center",
+            "Implementation-Version": version,
+            "Implementation-Vendor": "kkdt.github.io"
+        )
+    }
+}
+
 application {
     // Define the main class for the application.
-    mainClass = 'kkdt.ssc.desktop.App'
+    mainClass = 'kkdt.ssc.desktop.SSCDesktopApplication'
 }

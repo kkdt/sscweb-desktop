@@ -13,6 +13,9 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven {
+        url 'https://github.com/kkdt/mavenrepo/raw/master'
+    }
 }
 
 dependencies {
@@ -32,5 +35,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'kkdt.ssc.desktop.App'
 }

@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = 'sscweb-desktop'
-include('app')
+include('sscweb-desktop')

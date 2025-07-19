@@ -3,6 +3,7 @@
  */
 package org.example;
 
+import kkdt.ssc.desktop.App;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

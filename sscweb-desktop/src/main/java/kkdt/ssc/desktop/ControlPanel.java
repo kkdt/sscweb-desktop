@@ -2,6 +2,7 @@ package kkdt.ssc.desktop;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Main control panel for buttons.
@@ -24,5 +25,13 @@ public class ControlPanel extends JPanel {
         c.gridx = 1;
         c.gridy = 0;
         add(groundStationsButton, c);
+    }
+
+    public void setSatelliteButtonActionListener(ActionListener actionListener) {
+        this.satellitesButton.addActionListener(actionListener);
+    }
+
+    public void setGroundStationsButtonActionListener(ActionListener actionListener) {
+        this.groundStationsButton.addActionListener(actionListener);
     }
 }

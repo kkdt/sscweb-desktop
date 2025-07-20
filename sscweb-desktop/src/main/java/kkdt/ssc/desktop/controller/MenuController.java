@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UIController implements ActionListener {
+public class MenuController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         switch(actionEvent.getActionCommand()) {

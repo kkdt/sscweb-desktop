@@ -20,25 +20,9 @@ public class UIFrame extends JFrame {
         setLayout(new BorderLayout(10,10));
     }
 
-    /**
-     * Attach a listener to the 'About' menu item.
-     *
-     * @param about
-     * @return
-     */
-    public UIFrame aboutListener(ActionListener about) {
-        this.about.addActionListener(about);
-        return this;
-    }
-
-    /**
-     * Attach a listener to the 'Exit' menu item.
-     *
-     * @param exit
-     * @return
-     */
-    public UIFrame exitListener(ActionListener exit) {
-        this.exit.addActionListener(exit);
+    public UIFrame withMenuListener(ActionListener actionListener) {
+        this.exit.addActionListener(actionListener);
+        this.about.addActionListener(actionListener);
         return this;
     }
 

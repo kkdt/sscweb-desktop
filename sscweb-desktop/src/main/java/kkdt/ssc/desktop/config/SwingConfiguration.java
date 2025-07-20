@@ -4,6 +4,7 @@ import gov.nasa.gsfc.spdf.ssc.SatelliteSituationCenterInterface;
 import kkdt.ssc.desktop.ControlPanel;
 import kkdt.ssc.desktop.SSCClient;
 import kkdt.ssc.desktop.UIFrame;
+import kkdt.ssc.desktop.controller.GroundStationTableController;
 import kkdt.ssc.desktop.controller.MenuController;
 import kkdt.ssc.desktop.controller.SatelliteTableController;
 import kkdt.ssc.desktop.model.GroundStationModel;
@@ -42,9 +43,16 @@ public class SwingConfiguration {
 
     @Bean
     public JTable satellitesTable() {
-        JTable satellitesTable = new JTable();
-        satellitesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        return satellitesTable;
+        JTable table = new JTable();
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        return table;
+    }
+
+    @Bean
+    public JTable groundStationsTable() {
+        JTable table = new JTable();
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        return table;
     }
 
     @Bean
@@ -58,14 +66,27 @@ public class SwingConfiguration {
     }
 
     @Bean
+    public GroundStationTableController groundStationTableController(@Autowired JTable groundStationsTable,
+        @Autowired GroundStationModel groundStationModel,
+        @Autowired SSCClient sscClient)
+    {
+        GroundStationTableController controller = new GroundStationTableController(groundStationsTable, groundStationModel);
+        controller.setSatelliteSituationCenter(sscClient);
+        return controller;
+    }
+
+    @Bean
     public MenuController menuController() {
         return new MenuController();
     }
 
     @Bean
-    public ControlPanel controlPanel(@Autowired SatelliteTableController satelliteTableController) {
+    public ControlPanel controlPanel(@Autowired SatelliteTableController satelliteTableController,
+        @Autowired GroundStationTableController groundStationTableController)
+    {
         ControlPanel controlPanel = new ControlPanel();
         controlPanel.setSatelliteButtonActionListener(satelliteTableController);
+        controlPanel.setGroundStationsButtonActionListener(groundStationTableController);
         return controlPanel;
     }
 

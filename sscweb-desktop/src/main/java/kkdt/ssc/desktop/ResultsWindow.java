@@ -42,7 +42,7 @@ public class ResultsWindow extends JFrame {
         super.setVisible(b);
         if(!b) {
             EventQueue.invokeLater(() -> {
-                logger.info("Clearing satellites table");
+                logger.info("Clearing table");
                 tableController.clearTable();
             });
         }

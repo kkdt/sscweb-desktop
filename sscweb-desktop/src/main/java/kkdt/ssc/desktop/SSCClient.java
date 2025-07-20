@@ -1,8 +1,10 @@
 package kkdt.ssc.desktop;
 
+import gov.nasa.gsfc.spdf.ssc.GroundStationDescription;
 import gov.nasa.gsfc.spdf.ssc.SSCExternalException_Exception;
 import gov.nasa.gsfc.spdf.ssc.SatelliteDescription;
 import gov.nasa.gsfc.spdf.ssc.SatelliteSituationCenterInterface;
+import kkdt.ssc.desktop.model.GroundStationEntry;
 import kkdt.ssc.desktop.model.SatelliteEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,25 @@ public class SSCClient {
             logger.info("Satellites found: {}", results.size());
         } catch (SSCExternalException_Exception e) {
             logger.error("Encountered error retrieving all satellites", e);
+        }
+        return results;
+    }
+
+    public Collection<GroundStationEntry> getGroundStations() {
+        Collection<GroundStationEntry> results = Collections.emptyList();
+        try {
+            List<GroundStationDescription> allGroundStations = satelliteSituationCenter.getAllGroundStations();
+            results = allGroundStations.stream().map(s -> {
+                GroundStationEntry entry = new GroundStationEntry();
+                entry.setId(s.getId());
+                entry.setName(s.getName());
+                entry.setLatitude(s.getLatitude());
+                entry.setLongitude(s.getLongitude());
+                return entry;
+            }).toList();
+            logger.info("Ground stations found: {}", results.size());
+        } catch (SSCExternalException_Exception e) {
+            logger.error("Encountered error retrieving all ground stations", e);
         }
         return results;
     }

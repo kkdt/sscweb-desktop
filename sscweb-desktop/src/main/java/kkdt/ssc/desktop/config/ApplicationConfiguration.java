@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Configuration;
 
+import java.awt.EventQueue;
 import java.util.List;
 
 @Configuration
@@ -21,7 +22,7 @@ public class ApplicationConfiguration implements ApplicationRunner {
     private SatelliteSituationCenterInterface satelliteSituationCenter;
 
     @Autowired
-    private UIFrame uiFrame;
+    private UIFrame mainWindow;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
@@ -29,8 +30,10 @@ public class ApplicationConfiguration implements ApplicationRunner {
         List<GroundStationDescription> allGroundStations = satelliteSituationCenter.getAllGroundStations();
         logger.info("Found {} satellite(s) and {} ground station(s)", allSatellites.size(), allGroundStations.size());
 
-        uiFrame.pack();
-        uiFrame.setLocationRelativeTo(null);
-        uiFrame.setVisible(true);
+        EventQueue.invokeLater(() -> {
+            mainWindow.pack();
+            mainWindow.setLocationRelativeTo(null);
+            mainWindow.setVisible(true);
+        });
     }
 }

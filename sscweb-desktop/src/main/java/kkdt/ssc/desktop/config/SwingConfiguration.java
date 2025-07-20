@@ -91,7 +91,7 @@ public class SwingConfiguration {
     }
 
     @Bean
-    public UIFrame uiFrame(@Autowired MenuController menuController, @Autowired ControlPanel controlPanel) {
+    public UIFrame mainWindow(@Autowired MenuController menuController, @Autowired ControlPanel controlPanel) {
         UIFrame frame = new UIFrame(title)
             .withMenuListener(menuController);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

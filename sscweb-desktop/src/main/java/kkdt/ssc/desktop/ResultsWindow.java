@@ -14,6 +14,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
 
+/**
+ * Window that contains a scrolling table for storing results.
+ */
 public class ResultsWindow extends JFrame {
     private static final Logger logger = LoggerFactory.getLogger(ResultsWindow.class);
 
